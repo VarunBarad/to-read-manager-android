@@ -7,6 +7,16 @@ fun DbLink.toUiToReadEntry(): UiToReadEntry {
     return UiToReadEntry(
         databaseId = this.id,
         url = this.url,
-        title = this.title
+        title = this.title,
+        archived = this.archived
+    )
+}
+
+fun UiToReadEntry.toDbLink(): DbLink {
+    return DbLink(
+        id = this.databaseId,
+        url = this.url,
+        title = this.title,
+        archived = this.archived
     )
 }
