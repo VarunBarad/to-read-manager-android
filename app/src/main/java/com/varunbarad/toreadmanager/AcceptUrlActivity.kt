@@ -8,10 +8,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.snackbar.Snackbar
 import com.varunbarad.toreadmanager.databinding.ActivityAcceptUrlBinding
+import com.varunbarad.toreadmanager.local_database.models.DbLink
+import com.varunbarad.toreadmanager.util.Dependencies
+import com.varunbarad.toreadmanager.util.ThreadSchedulers
 import com.varunbarad.toreadmanager.util.extractUrlIfAny
 import com.varunbarad.toreadmanager.util.isUrl
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.subscribeBy
 
 class AcceptUrlActivity : AppCompatActivity() {
+    private val serviceDisposables = CompositeDisposable()
+
     private lateinit var dataBinding: ActivityAcceptUrlBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +55,7 @@ class AcceptUrlActivity : AppCompatActivity() {
         super.onStop()
 
         this.dataBinding.buttonAddToList.setOnClickListener(null)
+        this.serviceDisposables.clear()
     }
 
     private fun clickListenerButton() {
@@ -55,10 +63,28 @@ class AcceptUrlActivity : AppCompatActivity() {
         val title = this.dataBinding.editTextTitle.text.toString().trim()
 
         if (url.isUrl()) {
-            // ToDo: Add to database here
-            Toast.makeText(this, "Added to your list.", Toast.LENGTH_SHORT).show()
-            this.setResult(Activity.RESULT_OK)
-            this.finish()
+            this.serviceDisposables.add(
+                Dependencies.getToReadDatabase(this)
+                    .linksDao()
+                    .insertEntry(
+                        DbLink(
+                            url = url,
+                            title = title
+                        )
+                    )
+                    .subscribeOn(ThreadSchedulers.io())
+                    .observeOn(ThreadSchedulers.main())
+                    .subscribeBy(onComplete = {
+                        Toast.makeText(
+                            this,
+                            "Added to your list.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        this.setResult(Activity.RESULT_OK)
+                        this.finish()
+                    })
+            )
         } else {
             this.showMessage("Please enter a valid URL.")
             this.dataBinding.editTextUrl.error = "Invalid URL"
