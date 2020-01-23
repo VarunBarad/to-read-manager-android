@@ -1,4 +1,4 @@
-package com.varunbarad.toreadmanager
+package com.varunbarad.toreadmanager.screens
 
 import android.app.Activity
 import android.content.Intent
@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.snackbar.Snackbar
+import com.varunbarad.toreadmanager.R
 import com.varunbarad.toreadmanager.databinding.ActivityAcceptUrlBinding
 import com.varunbarad.toreadmanager.local_database.models.DbLink
 import com.varunbarad.toreadmanager.util.Dependencies
@@ -23,7 +24,10 @@ class AcceptUrlActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        this.dataBinding = DataBindingUtil.setContentView(this, R.layout.activity_accept_url)
+        this.dataBinding = DataBindingUtil.setContentView(
+            this,
+            R.layout.activity_accept_url
+        )
         this.setTitle(R.string.app_name)
 
         val sharedText: String? = intent.getStringExtra(Intent.EXTRA_TEXT)

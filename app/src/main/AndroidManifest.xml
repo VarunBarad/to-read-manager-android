@@ -18,7 +18,7 @@
         </activity>
 
         <activity
-            android:name=".AcceptUrlActivity"
+            android:name=".screens.AcceptUrlActivity"
             android:label="Add to list">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
