@@ -9,9 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.varunbarad.toreadmanager.R
 import com.varunbarad.toreadmanager.databinding.ActivityHomeBinding
 import com.varunbarad.toreadmanager.screens.home.entries_adapter.EntriesListAdapter
-import com.varunbarad.toreadmanager.util.Dependencies
-import com.varunbarad.toreadmanager.util.ThreadSchedulers
-import com.varunbarad.toreadmanager.util.toUiToReadEntry
+import com.varunbarad.toreadmanager.util.*
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 
@@ -65,11 +63,7 @@ class HomeActivity : AppCompatActivity() {
             this.toReadEntriesListAdapter
                 .getOpenToReadEntryObservable()
                 .subscribeBy(onNext = { entry ->
-                    Toast.makeText(
-                        this,
-                        "Open -> ${entry.title}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    this.openLinkInBrowser(entry.url)
                 })
         )
 
@@ -77,11 +71,20 @@ class HomeActivity : AppCompatActivity() {
             this.toReadEntriesListAdapter
                 .getArchiveToReadEntryObservable()
                 .subscribeBy(onNext = { entry ->
-                    Toast.makeText(
-                        this,
-                        "Archive -> ${entry.title}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    this.serviceDisposables.add(
+                        Dependencies.getToReadDatabase(this)
+                            .linksDao()
+                            .updateEntry(entry.toDbLink().copy(archived = true))
+                            .subscribeOn(ThreadSchedulers.io())
+                            .observeOn(ThreadSchedulers.main())
+                            .subscribeBy(onComplete = {
+                                Toast.makeText(
+                                    this,
+                                    "Entry archived successfully",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            })
+                    )
                 })
         )
 
@@ -89,11 +92,20 @@ class HomeActivity : AppCompatActivity() {
             this.toReadEntriesListAdapter
                 .getDeleteToReadEntryObservable()
                 .subscribeBy(onNext = { entry ->
-                    Toast.makeText(
-                        this,
-                        "Delete -> ${entry.title}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    this.serviceDisposables.add(
+                        Dependencies.getToReadDatabase(this)
+                            .linksDao()
+                            .deleteEntry(entry.toDbLink())
+                            .subscribeOn(ThreadSchedulers.io())
+                            .observeOn(ThreadSchedulers.main())
+                            .subscribeBy(onComplete = {
+                                Toast.makeText(
+                                    this,
+                                    "Entry deleted successfully",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            })
+                    )
                 })
         )
     }
