@@ -73,7 +73,8 @@ class AcceptUrlActivity : AppCompatActivity() {
                     .insertEntry(
                         DbLink(
                             url = url,
-                            title = title
+                            title = title,
+                            archived = false
                         )
                     )
                     .subscribeOn(ThreadSchedulers.io())
