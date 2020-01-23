@@ -5,7 +5,8 @@ import androidx.recyclerview.widget.DiffUtil
 data class UiToReadEntry(
     val databaseId: Int?,
     val url: String,
-    val title: String
+    val title: String,
+    val archived: Boolean
 ) {
     companion object {
         @JvmStatic
