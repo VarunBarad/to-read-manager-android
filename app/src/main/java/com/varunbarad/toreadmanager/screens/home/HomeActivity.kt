@@ -50,7 +50,7 @@ class HomeActivity : AppCompatActivity() {
         this.serviceDisposables.add(
             Dependencies.getToReadDatabase(this)
                 .linksDao()
-                .getEntries()
+                .getActiveEntries()
                 .map { entries -> entries.map { it.toUiToReadEntry() } }
                 .subscribeOn(ThreadSchedulers.io())
                 .observeOn(ThreadSchedulers.main())
