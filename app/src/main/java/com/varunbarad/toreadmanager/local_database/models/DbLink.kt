@@ -15,5 +15,6 @@ data class DbLink(
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null,
     @ColumnInfo(name = "url") val url: String,
-    @ColumnInfo(name = "title") val title: String
+    @ColumnInfo(name = "title") val title: String,
+    @ColumnInfo(name = "archived") val archived: Boolean
 )
