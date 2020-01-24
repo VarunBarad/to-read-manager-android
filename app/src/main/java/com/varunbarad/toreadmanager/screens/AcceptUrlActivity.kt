@@ -28,7 +28,7 @@ class AcceptUrlActivity : AppCompatActivity() {
             this,
             R.layout.activity_accept_url
         )
-        this.setTitle(R.string.app_name)
+        this.setSupportActionBar(this.dataBinding.toolbar)
 
         val sharedText: String? = intent.getStringExtra(Intent.EXTRA_TEXT)
         val sharedTitle: String? = intent.getStringExtra(Intent.EXTRA_TITLE)
