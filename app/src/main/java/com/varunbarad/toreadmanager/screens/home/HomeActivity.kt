@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.varunbarad.toreadmanager.R
 import com.varunbarad.toreadmanager.databinding.ActivityHomeBinding
+import com.varunbarad.toreadmanager.local_database.LinksDatabase
 import com.varunbarad.toreadmanager.screens.home.entries_adapter.EntriesListAdapter
 import com.varunbarad.toreadmanager.util.*
 import io.reactivex.disposables.CompositeDisposable
@@ -15,6 +16,9 @@ import io.reactivex.rxkotlin.subscribeBy
 
 class HomeActivity : AppCompatActivity() {
     private val serviceDisposables = CompositeDisposable()
+    private val toReadDatabase: LinksDatabase by lazy {
+        Dependencies.getToReadDatabase(this)
+    }
 
     private lateinit var viewBinding: ActivityHomeBinding
 
@@ -46,7 +50,7 @@ class HomeActivity : AppCompatActivity() {
         super.onStart()
 
         this.serviceDisposables.add(
-            Dependencies.getToReadDatabase(this)
+            this.toReadDatabase
                 .linksDao()
                 .getActiveEntries()
                 .map { entries -> entries.map { it.toUiToReadEntry() } }
@@ -72,7 +76,7 @@ class HomeActivity : AppCompatActivity() {
                 .getArchiveToReadEntryObservable()
                 .subscribeBy(onNext = { entry ->
                     this.serviceDisposables.add(
-                        Dependencies.getToReadDatabase(this)
+                        this.toReadDatabase
                             .linksDao()
                             .updateEntry(entry.toDbLink().copy(archived = true))
                             .subscribeOn(ThreadSchedulers.io())
@@ -93,7 +97,7 @@ class HomeActivity : AppCompatActivity() {
                 .getDeleteToReadEntryObservable()
                 .subscribeBy(onNext = { entry ->
                     this.serviceDisposables.add(
-                        Dependencies.getToReadDatabase(this)
+                        this.toReadDatabase
                             .linksDao()
                             .deleteEntry(entry.toDbLink())
                             .subscribeOn(ThreadSchedulers.io())
