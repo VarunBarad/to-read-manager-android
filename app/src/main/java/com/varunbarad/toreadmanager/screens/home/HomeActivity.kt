@@ -1,11 +1,11 @@
 package com.varunbarad.toreadmanager.screens.home
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.varunbarad.toreadmanager.R
 import com.varunbarad.toreadmanager.databinding.ActivityHomeBinding
 import com.varunbarad.toreadmanager.local_database.LinksDatabase
@@ -84,11 +84,7 @@ class HomeActivity : AppCompatActivity() {
                             .subscribeOn(ThreadSchedulers.io())
                             .observeOn(ThreadSchedulers.main())
                             .subscribeBy(onComplete = {
-                                Toast.makeText(
-                                    this,
-                                    "Entry archived successfully",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                this.showMessage("Entry archived successfully")
                             })
                     )
                 })
@@ -105,11 +101,7 @@ class HomeActivity : AppCompatActivity() {
                             .subscribeOn(ThreadSchedulers.io())
                             .observeOn(ThreadSchedulers.main())
                             .subscribeBy(onComplete = {
-                                Toast.makeText(
-                                    this,
-                                    "Entry deleted successfully",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                this.showMessage("Entry deleted successfully")
                             })
                     )
                 })
@@ -120,5 +112,13 @@ class HomeActivity : AppCompatActivity() {
         super.onStop()
 
         this.serviceDisposables.clear()
+    }
+
+    private fun showMessage(message: String) {
+        Snackbar.make(
+            this.viewBinding.root,
+            message,
+            Snackbar.LENGTH_SHORT
+        ).show()
     }
 }
