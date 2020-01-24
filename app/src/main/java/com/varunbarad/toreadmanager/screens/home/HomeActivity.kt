@@ -31,6 +31,8 @@ class HomeActivity : AppCompatActivity() {
             R.layout.activity_home
         )
 
+        this.setSupportActionBar(this.viewBinding.toolbar)
+
         val recyclerViewLayoutManager = LinearLayoutManager(
             this.viewBinding.recyclerViewToReadEntries.context,
             LinearLayoutManager.VERTICAL,
