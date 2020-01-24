@@ -19,7 +19,9 @@
 
         <activity
             android:name=".screens.AcceptUrlActivity"
-            android:label="Add to list">
+            android:icon="@mipmap/ic_add_entry"
+            android:label="Add to list"
+            android:roundIcon="@mipmap/ic_add_entry_round">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
 
