@@ -15,6 +15,10 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 
 class EntriesArchivedFragment : Fragment() {
+    companion object {
+        const val FRAGMENT_TAG = "EntriesArchivedFragment"
+    }
+
     private val serviceDisposables = CompositeDisposable()
     private val toReadDatabase: LinksDatabase by lazy {
         Dependencies.getToReadDatabase(this.requireContext())
