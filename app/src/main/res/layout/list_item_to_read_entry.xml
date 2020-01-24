@@ -43,6 +43,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="2dp"
             android:text="Open"
+            app:backgroundTint="@color/colorOpen"
             app:layout_constraintEnd_toStartOf="@id/button_archive"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/url" />
@@ -55,6 +56,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="2dp"
             android:text="Archive"
+            app:backgroundTint="@color/colorArchive"
             app:layout_constraintEnd_toStartOf="@id/button_delete"
             app:layout_constraintStart_toEndOf="@id/button_open"
             app:layout_constraintTop_toBottomOf="@id/url" />
@@ -66,6 +68,7 @@
             android:layout_marginStart="2dp"
             android:layout_marginTop="4dp"
             android:text="Delete"
+            app:backgroundTint="@color/colorDelete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/button_archive"
             app:layout_constraintTop_toBottomOf="@id/url" />
