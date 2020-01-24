@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#008b13</color>
     <color name="colorAccent">#bc4543</color>
 
+    <color name="textInvertedPrimary">#ffffff</color>
+
     <color name="colorOpen">#2196f3</color>
     <color name="colorArchive">#795548</color>
     <color name="colorDelete">#f44336</color>
