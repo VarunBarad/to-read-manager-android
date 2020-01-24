@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import com.google.android.material.snackbar.Snackbar
 import com.varunbarad.toreadmanager.R
 import com.varunbarad.toreadmanager.databinding.ActivityAcceptUrlBinding
+import com.varunbarad.toreadmanager.local_database.LinksDatabase
 import com.varunbarad.toreadmanager.local_database.models.DbLink
 import com.varunbarad.toreadmanager.util.Dependencies
 import com.varunbarad.toreadmanager.util.ThreadSchedulers
@@ -19,6 +20,9 @@ import io.reactivex.rxkotlin.subscribeBy
 
 class AcceptUrlActivity : AppCompatActivity() {
     private val serviceDisposables = CompositeDisposable()
+    private val toReadDatabase: LinksDatabase by lazy {
+        Dependencies.getToReadDatabase(this)
+    }
 
     private lateinit var dataBinding: ActivityAcceptUrlBinding
 
@@ -68,7 +72,7 @@ class AcceptUrlActivity : AppCompatActivity() {
 
         if (url.isUrl()) {
             this.serviceDisposables.add(
-                Dependencies.getToReadDatabase(this)
+                this.toReadDatabase
                     .linksDao()
                     .insertEntry(
                         DbLink(
