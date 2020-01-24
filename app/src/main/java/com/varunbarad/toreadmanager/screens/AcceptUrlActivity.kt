@@ -95,8 +95,7 @@ class AcceptUrlActivity : AppCompatActivity() {
                     })
             )
         } else {
-            this.showMessage("Please enter a valid URL.")
-            this.dataBinding.editTextUrl.error = "Invalid URL"
+            this.dataBinding.textLayoutUrl.error = "Invalid URL"
         }
     }
 

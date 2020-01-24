@@ -32,33 +32,51 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/editText_url"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textLayout_url"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:hint="Link"
-            android:inputType="textUri"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxBackgroundMode="outline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView_title" />
+            app:layout_constraintTop_toBottomOf="@id/textView_title">
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/editText_title"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editText_url"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textUri"
+                tools:text="https://www.syfy.com/syfywire/battle-of-the-bulges-have-astronomers-been-wrong-about-spiral-galaxies-all-this-time" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textLayout_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:hint="Title"
-            android:lines="1"
-            android:maxLines="1"
-            android:singleLine="true"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxBackgroundMode="outline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editText_url" />
+            app:layout_constraintTop_toBottomOf="@id/textLayout_url">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editText_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:maxLines="1"
+                android:singleLine="true"
+                tools:text="Battle of the bulges" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_addToList"
