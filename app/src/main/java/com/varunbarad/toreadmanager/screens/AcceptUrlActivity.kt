@@ -5,9 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import com.google.android.material.snackbar.Snackbar
-import com.varunbarad.toreadmanager.R
 import com.varunbarad.toreadmanager.databinding.ActivityAcceptUrlBinding
 import com.varunbarad.toreadmanager.local_database.LinksDatabase
 import com.varunbarad.toreadmanager.local_database.models.DbLink
@@ -24,15 +22,14 @@ class AcceptUrlActivity : AppCompatActivity() {
         Dependencies.getToReadDatabase(this)
     }
 
-    private lateinit var dataBinding: ActivityAcceptUrlBinding
+    private lateinit var viewBinding: ActivityAcceptUrlBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        this.dataBinding = DataBindingUtil.setContentView(
-            this,
-            R.layout.activity_accept_url
-        )
-        this.setSupportActionBar(this.dataBinding.toolbar)
+        this.viewBinding = ActivityAcceptUrlBinding.inflate(layoutInflater)
+        this.setContentView(this.viewBinding.root)
+
+        this.setSupportActionBar(this.viewBinding.toolbar)
 
         val sharedText: String? = intent.getStringExtra(Intent.EXTRA_TEXT)
         val sharedTitle: String? = intent.getStringExtra(Intent.EXTRA_TITLE)
@@ -40,21 +37,21 @@ class AcceptUrlActivity : AppCompatActivity() {
         val sharedUrl: String? = sharedText?.extractUrlIfAny()
 
         if (sharedUrl != null) {
-            this.dataBinding.editTextUrl.setText(sharedUrl)
-            this.dataBinding.editTextTitle.setText(sharedTitle ?: "")
+            this.viewBinding.editTextUrl.setText(sharedUrl)
+            this.viewBinding.editTextTitle.setText(sharedTitle ?: "")
 
-            this.dataBinding.editTextTitle.requestFocus()
+            this.viewBinding.editTextTitle.requestFocus()
         } else {
             this.showMessage("No URL found in the shared text. Please check it or enter URL yourself.")
 
-            this.dataBinding.editTextUrl.requestFocus()
+            this.viewBinding.editTextUrl.requestFocus()
         }
     }
 
     override fun onStart() {
         super.onStart()
 
-        this.dataBinding.buttonAddToList.setOnClickListener {
+        this.viewBinding.buttonAddToList.setOnClickListener {
             this.clickListenerButton()
         }
     }
@@ -62,13 +59,13 @@ class AcceptUrlActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
 
-        this.dataBinding.buttonAddToList.setOnClickListener(null)
+        this.viewBinding.buttonAddToList.setOnClickListener(null)
         this.serviceDisposables.clear()
     }
 
     private fun clickListenerButton() {
-        val url = this.dataBinding.editTextUrl.text.toString().trim()
-        val title = this.dataBinding.editTextTitle.text.toString().trim()
+        val url = this.viewBinding.editTextUrl.text.toString().trim()
+        val title = this.viewBinding.editTextTitle.text.toString().trim()
 
         if (url.isUrl()) {
             this.serviceDisposables.add(
@@ -95,11 +92,11 @@ class AcceptUrlActivity : AppCompatActivity() {
                     })
             )
         } else {
-            this.dataBinding.textLayoutUrl.error = "Invalid URL"
+            this.viewBinding.textLayoutUrl.error = "Invalid URL"
         }
     }
 
     private fun showMessage(message: String) {
-        Snackbar.make(this.dataBinding.root, message, Snackbar.LENGTH_LONG).show()
+        Snackbar.make(this.viewBinding.root, message, Snackbar.LENGTH_LONG).show()
     }
 }

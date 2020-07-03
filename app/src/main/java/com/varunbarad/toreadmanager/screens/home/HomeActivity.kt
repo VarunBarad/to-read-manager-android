@@ -3,7 +3,6 @@ package com.varunbarad.toreadmanager.screens.home
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import com.varunbarad.toreadmanager.R
 import com.varunbarad.toreadmanager.databinding.ActivityHomeBinding
 import com.varunbarad.toreadmanager.screens.home.fragments.archived.EntriesArchivedFragment
@@ -17,10 +16,8 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        this.viewBinding = DataBindingUtil.setContentView(
-            this,
-            R.layout.activity_home
-        )
+        this.viewBinding = ActivityHomeBinding.inflate(layoutInflater)
+        this.setContentView(this.viewBinding.root)
 
         this.setSupportActionBar(this.viewBinding.toolbar)
 

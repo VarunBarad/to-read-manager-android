@@ -77,7 +77,5 @@ class ToReadEntryViewHolder(
         this.viewBinding.buttonDelete.setOnClickListener {
             this.deleteButtonClickListener(toReadEntry)
         }
-
-        this.viewBinding.executePendingBindings()
     }
 }
