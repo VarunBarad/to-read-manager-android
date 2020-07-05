@@ -6,4 +6,10 @@
     <string name="acceptUrl_addToList">Add to list</string>
     <string name="acceptUrl_labelLink">Link</string>
     <string name="acceptUrl_labelTitle">Title</string>
+
+    <!-- To-Read Entry -->
+    <string name="toReadEntry_labelOpen">Open</string>
+    <string name="toReadEntry_labelArchive">Archive</string>
+    <string name="toReadEntry_labelUnarchive">Unarchive</string>
+    <string name="toReadEntry_labelDelete">Delete</string>
 </resources>
