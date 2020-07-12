@@ -6,26 +6,30 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
+import com.varunbarad.toreadmanager.ToReadManagerApplication
 import com.varunbarad.toreadmanager.databinding.ActivityAcceptUrlBinding
-import com.varunbarad.toreadmanager.local_database.LinksDatabase
+import com.varunbarad.toreadmanager.local_database.LinksDao
 import com.varunbarad.toreadmanager.local_database.models.DbLink
-import com.varunbarad.toreadmanager.util.Dependencies
 import com.varunbarad.toreadmanager.util.ThreadSchedulers
 import com.varunbarad.toreadmanager.util.extractUrlIfAny
 import com.varunbarad.toreadmanager.util.isUrl
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
+import javax.inject.Inject
 
 class AcceptUrlActivity : AppCompatActivity() {
     private val serviceDisposables = CompositeDisposable()
-    private val toReadDatabase: LinksDatabase by lazy {
-        Dependencies.getToReadDatabase(this)
-    }
+
+    @Inject
+    lateinit var linksDao: LinksDao
 
     private lateinit var viewBinding: ActivityAcceptUrlBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        ToReadManagerApplication.appComponent.inject(this)
+
         this.viewBinding = ActivityAcceptUrlBinding.inflate(layoutInflater)
         this.setContentView(this.viewBinding.root)
 
@@ -69,8 +73,7 @@ class AcceptUrlActivity : AppCompatActivity() {
 
         if (url.isUrl()) {
             this.serviceDisposables.add(
-                this.toReadDatabase
-                    .linksDao()
+                this.linksDao
                     .insertEntry(
                         DbLink(
                             url = url,
