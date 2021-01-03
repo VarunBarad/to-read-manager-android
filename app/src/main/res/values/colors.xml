@@ -6,6 +6,8 @@
 
     <color name="textInvertedPrimary">#ffffff</color>
 
+    <color name="colorIconInverted">#ffffffff</color>
+
     <color name="colorOpen">#2196f3</color>
     <color name="colorArchive">#795548</color>
     <color name="colorDelete">#f44336</color>

@@ -51,4 +51,11 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:${libraryVersions.androidX.room}"
     kapt "androidx.room:room-compiler:${libraryVersions.androidX.room}"
     implementation "androidx.room:room-rxjava2:${libraryVersions.androidX.room}"
+
+    // Moshi
+    implementation "com.squareup.moshi:moshi:${libraryVersions.moshi}"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:${libraryVersions.moshi}"
+
+    // ThreeTen Date Library
+    implementation "com.jakewharton.threetenabp:threetenabp:$libraryVersions.threeTenAbp"
 }

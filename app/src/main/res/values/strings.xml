@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">To-Read Manager</string>
 
+    <!-- Home Screen -->
+    <string name="home_label_active">Active</string>
+    <string name="home_label_archived">Archived</string>
+    <string name="home_label_exportData">Export Data</string>
+    <string name="home_message_errorInExport">There was an error in exporting your data</string>
+
     <!-- Accept Url Screen -->
     <string name="acceptUrl_title">@string/acceptUrl_addToList</string>
     <string name="acceptUrl_addToList">Add to list</string>

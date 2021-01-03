@@ -2,6 +2,7 @@ package com.varunbarad.toreadmanager.di
 
 import com.varunbarad.toreadmanager.ToReadManagerApplication
 import com.varunbarad.toreadmanager.screens.AcceptUrlActivity
+import com.varunbarad.toreadmanager.screens.home.HomeActivity
 import com.varunbarad.toreadmanager.screens.home.fragments.archived.EntriesArchivedFragment
 import com.varunbarad.toreadmanager.screens.home.fragments.current.EntriesCurrentFragment
 import dagger.Component
@@ -18,6 +19,7 @@ interface AppComponent {
     fun inject(target: EntriesCurrentFragment)
     fun inject(target: EntriesArchivedFragment)
     fun inject(target: AcceptUrlActivity)
+    fun inject(target: HomeActivity)
 }
 
 @Scope
