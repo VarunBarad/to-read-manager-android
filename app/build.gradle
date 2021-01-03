@@ -4,10 +4,9 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
     viewBinding.enabled = true
 
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.varunbarad.toreadmanager"
         minSdkVersion 21
@@ -25,29 +24,31 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'com.google.android.material:material:1.1.0-rc02'
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${libraryVersions.kotlin}"
 
     // RxJava
-    implementation "io.reactivex.rxjava2:rxjava:2.2.9"
-    implementation "io.reactivex.rxjava2:rxkotlin:2.3.0"
-    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
-
-    // Room Database library
-    implementation "androidx.room:room-runtime:2.2.3"
-    annotationProcessor "androidx.room:room-compiler:2.2.3"
-    kapt "androidx.room:room-compiler:2.2.3"
-    implementation "androidx.room:room-rxjava2:2.2.3"
+    implementation "io.reactivex.rxjava2:rxjava:${libraryVersions.rxJava.rxJava2}"
+    implementation "io.reactivex.rxjava2:rxkotlin:${libraryVersions.rxJava.rxKotlin}"
+    implementation "io.reactivex.rxjava2:rxandroid:${libraryVersions.rxJava.rxAndroid}"
 
     // Dagger
-    implementation "com.google.dagger:dagger:2.28"
-    kapt "com.google.dagger:dagger-compiler:2.28"
+    implementation "com.google.dagger:dagger:${libraryVersions.dagger}"
+    kapt "com.google.dagger:dagger-compiler:${libraryVersions.dagger}"
 
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    // Android Kotlin Extensions
+    implementation "androidx.core:core-ktx:${libraryVersions.androidX.kotlinExtensions}"
+
+    // AppCompat
+    implementation "androidx.appcompat:appcompat:${libraryVersions.androidX.appCompat}"
+
+    implementation "androidx.constraintlayout:constraintlayout:${libraryVersions.androidX.constraintLayout}"
+
+    implementation "com.google.android.material:material:${libraryVersions.androidX.materialDesign}"
+
+    // Room Database library
+    implementation "androidx.room:room-runtime:${libraryVersions.androidX.room}"
+    annotationProcessor "androidx.room:room-compiler:${libraryVersions.androidX.room}"
+    kapt "androidx.room:room-compiler:${libraryVersions.androidX.room}"
+    implementation "androidx.room:room-rxjava2:${libraryVersions.androidX.room}"
 }
