@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
@@ -34,10 +33,6 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:${libraryVersions.rxJava.rxJava2}"
     implementation "io.reactivex.rxjava2:rxkotlin:${libraryVersions.rxJava.rxKotlin}"
     implementation "io.reactivex.rxjava2:rxandroid:${libraryVersions.rxJava.rxAndroid}"
-
-    // Dagger
-    implementation "com.google.dagger:dagger:${libraryVersions.dagger}"
-    kapt "com.google.dagger:dagger-compiler:${libraryVersions.dagger}"
 
     // Android Kotlin Extensions
     implementation "androidx.core:core-ktx:${libraryVersions.androidX.kotlinExtensions}"

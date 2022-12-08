@@ -10,10 +10,10 @@ import com.google.android.material.snackbar.Snackbar
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import com.varunbarad.toreadmanager.R
-import com.varunbarad.toreadmanager.ToReadManagerApplication
 import com.varunbarad.toreadmanager.databinding.ActivityHomeBinding
 import com.varunbarad.toreadmanager.export.model.ExportLink
 import com.varunbarad.toreadmanager.local_database.LinksDao
+import com.varunbarad.toreadmanager.local_database.LinksDatabase
 import com.varunbarad.toreadmanager.screens.home.fragments.archived.EntriesArchivedFragment
 import com.varunbarad.toreadmanager.screens.home.fragments.current.EntriesCurrentFragment
 import com.varunbarad.toreadmanager.util.toExportLink
@@ -21,7 +21,6 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
-import javax.inject.Inject
 
 class HomeActivity : AppCompatActivity() {
     companion object {
@@ -31,10 +30,8 @@ class HomeActivity : AppCompatActivity() {
 
     private val serviceDisposables = CompositeDisposable()
 
-    @Inject
     lateinit var linksDao: LinksDao
 
-    @Inject
     lateinit var moshi: Moshi
 
     private lateinit var viewBinding: ActivityHomeBinding
@@ -42,7 +39,7 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        ToReadManagerApplication.appComponent.inject(this)
+        this.injectDependencies()
 
         this.viewBinding = ActivityHomeBinding.inflate(layoutInflater)
         this.setContentView(this.viewBinding.root)
@@ -62,6 +59,12 @@ class HomeActivity : AppCompatActivity() {
                     EntriesCurrentFragment.FRAGMENT_TAG
                 ).commitAllowingStateLoss()
         }
+    }
+
+    private fun injectDependencies() {
+        this.moshi = Moshi.Builder().build()
+
+        this.linksDao = LinksDatabase.getInstance(this).linksDao()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
