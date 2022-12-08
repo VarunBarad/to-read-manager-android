@@ -8,16 +8,15 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
-import com.varunbarad.toreadmanager.ToReadManagerApplication
 import com.varunbarad.toreadmanager.databinding.FragmentEntriesArchivedBinding
 import com.varunbarad.toreadmanager.local_database.LinksDao
+import com.varunbarad.toreadmanager.local_database.LinksDatabase
 import com.varunbarad.toreadmanager.util.ThreadSchedulers
 import com.varunbarad.toreadmanager.util.openLinkInBrowser
 import com.varunbarad.toreadmanager.util.toDbLink
 import com.varunbarad.toreadmanager.util.toUiToReadEntry
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
-import javax.inject.Inject
 
 class EntriesArchivedFragment : Fragment() {
     companion object {
@@ -26,7 +25,6 @@ class EntriesArchivedFragment : Fragment() {
 
     private val serviceDisposables = CompositeDisposable()
 
-    @Inject
     lateinit var linksDao: LinksDao
 
     private lateinit var viewBinding: FragmentEntriesArchivedBinding
@@ -37,7 +35,11 @@ class EntriesArchivedFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        ToReadManagerApplication.appComponent.inject(this)
+        this.injectDependencies()
+    }
+
+    private fun injectDependencies() {
+        this.linksDao = LinksDatabase.getInstance(this.requireContext()).linksDao()
     }
 
     override fun onCreateView(
