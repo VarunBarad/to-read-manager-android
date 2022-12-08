@@ -3,7 +3,7 @@
 buildscript {
     ext {
         libraryVersions = [
-                kotlin     : '1.7.10',
+                kotlin     : '1.7.20',
                 rxJava     : [
                         rxJava2  : '2.2.9',
                         rxKotlin : '2.3.0',
