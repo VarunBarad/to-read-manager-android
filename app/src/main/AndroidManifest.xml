@@ -10,7 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".screens.home.HomeActivity">
+        <activity
+            android:name=".screens.home.HomeActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,7 +24,8 @@
             android:name=".screens.AcceptUrlActivity"
             android:icon="@mipmap/ic_add_entry"
             android:label="Add to list"
-            android:roundIcon="@mipmap/ic_add_entry_round">
+            android:roundIcon="@mipmap/ic_add_entry_round"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
 
