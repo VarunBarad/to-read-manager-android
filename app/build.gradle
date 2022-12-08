@@ -9,6 +9,7 @@ android {
     }
 
     compileSdkVersion 33
+    namespace 'com.varunbarad.toreadmanager'
     defaultConfig {
         applicationId "com.varunbarad.toreadmanager"
         minSdkVersion 21
