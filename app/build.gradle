@@ -4,7 +4,9 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    viewBinding.enabled = true
+    buildFeatures {
+        viewBinding = true
+    }
 
     compileSdkVersion 29
     defaultConfig {
