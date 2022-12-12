@@ -34,9 +34,6 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxkotlin:${libraryVersions.rxJava.rxKotlin}"
     implementation "io.reactivex.rxjava2:rxandroid:${libraryVersions.rxJava.rxAndroid}"
 
-    // Android Kotlin Extensions
-    implementation "androidx.core:core-ktx:${libraryVersions.androidX.kotlinExtensions}"
-
     // AppCompat
     implementation "androidx.appcompat:appcompat:${libraryVersions.androidX.appCompat}"
 
