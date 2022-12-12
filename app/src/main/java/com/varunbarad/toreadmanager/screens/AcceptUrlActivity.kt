@@ -34,13 +34,21 @@ class AcceptUrlActivity : AppCompatActivity() {
         this.setSupportActionBar(this.viewBinding.toolbar)
 
         val sharedText: String? = intent.getStringExtra(Intent.EXTRA_TEXT)
-        val sharedTitle: String? = intent.getStringExtra(Intent.EXTRA_TITLE)
+        val extraTitle: String? = intent.getStringExtra(Intent.EXTRA_TITLE)
+        val extraSubject: String? = intent.getStringExtra(Intent.EXTRA_SUBJECT)
+        val sharedTitle: String = if (extraTitle != null && extraTitle.isNotBlank()) {
+            extraTitle
+        } else if (extraSubject != null && extraSubject.isNotBlank()) {
+            extraSubject
+        } else {
+            ""
+        }
 
         val sharedUrl: String? = sharedText?.extractUrlIfAny()
 
         if (sharedUrl != null) {
             this.viewBinding.editTextUrl.setText(sharedUrl)
-            this.viewBinding.editTextTitle.setText(sharedTitle ?: "")
+            this.viewBinding.editTextTitle.setText(sharedTitle)
 
             this.viewBinding.editTextTitle.requestFocus()
         } else {
