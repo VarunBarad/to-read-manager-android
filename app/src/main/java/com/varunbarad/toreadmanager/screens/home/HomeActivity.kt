@@ -14,6 +14,7 @@ import com.varunbarad.toreadmanager.databinding.ActivityHomeBinding
 import com.varunbarad.toreadmanager.export.model.ExportLink
 import com.varunbarad.toreadmanager.local_database.LinksDao
 import com.varunbarad.toreadmanager.local_database.LinksDatabase
+import com.varunbarad.toreadmanager.screens.AcceptUrlActivity
 import com.varunbarad.toreadmanager.screens.home.fragments.archived.EntriesArchivedFragment
 import com.varunbarad.toreadmanager.screens.home.fragments.current.EntriesCurrentFragment
 import com.varunbarad.toreadmanager.util.toExportLink
@@ -84,6 +85,10 @@ class HomeActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.button_export -> {
                 this.openExportFileChooser(exportFileName(), EXPORT_FILE_MIME_TYPE)
+                true
+            }
+            R.id.buttonAdd -> {
+                this.openAddUrlScreen()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -165,6 +170,11 @@ class HomeActivity : AppCompatActivity() {
             message,
             Snackbar.LENGTH_SHORT
         ).show()
+    }
+
+    private fun openAddUrlScreen() {
+        val intent = Intent(this, AcceptUrlActivity::class.java)
+        startActivity(intent)
     }
 
     private fun openExportFileChooser(fileName: String, mimeType: String) {
