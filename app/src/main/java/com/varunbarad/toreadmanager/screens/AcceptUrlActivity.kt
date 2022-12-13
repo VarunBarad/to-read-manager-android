@@ -10,6 +10,7 @@ import com.varunbarad.toreadmanager.databinding.ActivityAcceptUrlBinding
 import com.varunbarad.toreadmanager.local_database.LinksDao
 import com.varunbarad.toreadmanager.local_database.LinksDatabase
 import com.varunbarad.toreadmanager.local_database.models.DbLink
+import com.varunbarad.toreadmanager.screens.home.HomeActivity
 import com.varunbarad.toreadmanager.util.ThreadSchedulers
 import com.varunbarad.toreadmanager.util.extractUrlIfAny
 import com.varunbarad.toreadmanager.util.isUrl
@@ -52,9 +53,12 @@ class AcceptUrlActivity : AppCompatActivity() {
 
             this.viewBinding.editTextTitle.requestFocus()
         } else {
-            this.showMessage("No URL found in the shared text. Please check it or enter URL yourself.")
+            val referer = intent.getStringExtra(Intent.EXTRA_REFERRER)
+            if (referer != HomeActivity::class.java.simpleName) {
+                this.showMessage("No URL found in the shared text. Please check it or enter URL yourself.")
 
-            this.viewBinding.editTextUrl.requestFocus()
+                this.viewBinding.editTextUrl.requestFocus()
+            }
         }
     }
 

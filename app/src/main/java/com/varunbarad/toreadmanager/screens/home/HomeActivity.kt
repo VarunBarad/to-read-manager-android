@@ -173,7 +173,9 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun openAddUrlScreen() {
-        val intent = Intent(this, AcceptUrlActivity::class.java)
+        val intent = Intent(this, AcceptUrlActivity::class.java).apply {
+            putExtra(Intent.EXTRA_REFERRER, HomeActivity::class.java.simpleName)
+        }
         startActivity(intent)
     }
 
