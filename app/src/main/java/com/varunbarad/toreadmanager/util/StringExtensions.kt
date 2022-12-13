@@ -9,14 +9,14 @@ package com.varunbarad.toreadmanager.util
  */
 fun String.extractUrlIfAny(): String? {
     return Regex(
-        "(http://.+)|(https://.+)",
-        RegexOption.IGNORE_CASE
+        pattern = "(http://.+)|(https://.+)",
+        options = setOf(RegexOption.IGNORE_CASE),
     ).find(this)?.value
 }
 
 fun String.isUrl(): Boolean {
     return Regex(
-        "(http://.+)|(https://.+)",
-        RegexOption.IGNORE_CASE
+        pattern = "(http://.+)|(https://.+)",
+        options = setOf(RegexOption.IGNORE_CASE),
     ).matches(this)
 }
