@@ -25,7 +25,7 @@ import org.threeten.bp.format.DateTimeFormatter
 
 class HomeActivity : AppCompatActivity() {
     companion object {
-        private const val REQUEST_CODE_FILE_CHOOSER = 1834
+        private const val REQUEST_CODE_EXPORT_FILE_CHOOSER = 1834
         private const val EXPORT_FILE_MIME_TYPE = "application/json"
     }
 
@@ -107,16 +107,16 @@ class HomeActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == REQUEST_CODE_FILE_CHOOSER) {
+        if (requestCode == REQUEST_CODE_EXPORT_FILE_CHOOSER) {
             try {
                 val result = when (resultCode) {
                     RESULT_OK -> {
                         val fileUri = data!!.data!!
                         val outputStream = contentResolver.openOutputStream(fileUri)!!
-                        FileChooserResult.Success(outputStream)
+                        ExportFileChooserResult.Success(outputStream)
                     }
-                    RESULT_CANCELED -> FileChooserResult.Error
-                    else -> FileChooserResult.Error
+                    RESULT_CANCELED -> ExportFileChooserResult.Error
+                    else -> ExportFileChooserResult.Error
                 }
 
                 this.onExportDataFileChooserResult(result)
@@ -185,13 +185,13 @@ class HomeActivity : AppCompatActivity() {
             type = mimeType
             putExtra(Intent.EXTRA_TITLE, fileName)
         }
-        startActivityForResult(intent, REQUEST_CODE_FILE_CHOOSER)
+        startActivityForResult(intent, REQUEST_CODE_EXPORT_FILE_CHOOSER)
     }
 
-    private fun onExportDataFileChooserResult(result: FileChooserResult) {
+    private fun onExportDataFileChooserResult(result: ExportFileChooserResult) {
         when (result) {
-            FileChooserResult.Error -> this.showMessage(getString(R.string.home_message_errorInExport))
-            is FileChooserResult.Success -> {
+            ExportFileChooserResult.Error -> this.showMessage(getString(R.string.home_message_errorInExport))
+            is ExportFileChooserResult.Success -> {
                 this.serviceDisposables.add(
                     this.linksDao
                         .getAllEntries()
