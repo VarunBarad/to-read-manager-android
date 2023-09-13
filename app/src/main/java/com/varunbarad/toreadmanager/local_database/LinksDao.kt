@@ -19,6 +19,9 @@ interface LinksDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertEntry(entry: DbLink): Completable
 
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    fun insertAllEntries(entries: List<DbLink>): Completable
+
     @Delete
     fun deleteEntry(entry: DbLink): Completable
 

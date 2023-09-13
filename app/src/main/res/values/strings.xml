@@ -5,8 +5,10 @@
     <string name="home_label_active">Active</string>
     <string name="home_label_archived">Archived</string>
     <string name="home_label_exportData">Export Data</string>
+    <string name="home_label_importData">Import Data</string>
     <string name="home_label_addNew">Add new</string>
     <string name="home_message_errorInExport">There was an error in exporting your data</string>
+    <string name="home_message_errorInImport">There was an error in importing your data</string>
 
     <!-- Accept Url Screen -->
     <string name="acceptUrl_title">@string/acceptUrl_addToList</string>

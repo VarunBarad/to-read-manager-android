@@ -31,3 +31,12 @@ fun DbLink.toExportLink(): ExportLink {
         archived = this.archived,
     )
 }
+
+fun ExportLink.toDbLink(): DbLink {
+    return DbLink(
+        id = this.id.toInt(),
+        title = this.title,
+        url = this.url,
+        archived = this.archived,
+    )
+}
