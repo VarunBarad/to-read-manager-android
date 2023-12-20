@@ -12,7 +12,7 @@ import com.varunbarad.toreadmanager.databinding.FragmentEntriesArchivedBinding
 import com.varunbarad.toreadmanager.local_database.LinksDao
 import com.varunbarad.toreadmanager.local_database.LinksDatabase
 import com.varunbarad.toreadmanager.util.ThreadSchedulers
-import com.varunbarad.toreadmanager.util.openLinkInBrowser
+import com.varunbarad.toreadmanager.util.openLinkInCustomTab
 import com.varunbarad.toreadmanager.util.toDbLink
 import com.varunbarad.toreadmanager.util.toUiToReadEntry
 import io.reactivex.disposables.CompositeDisposable
@@ -85,7 +85,7 @@ class EntriesArchivedFragment : Fragment() {
             this.toReadEntriesListAdapter
                 .getOpenToReadEntryObservable()
                 .subscribeBy(onNext = { entry ->
-                    this.requireContext().openLinkInBrowser(entry.url)
+                    this.requireContext().openLinkInCustomTab(entry.url)
                 })
         )
 
