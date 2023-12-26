@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:singleLine="true"
-        android:textColor="@color/textPrimary"
+        android:textColor="@color/textSecondary"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
