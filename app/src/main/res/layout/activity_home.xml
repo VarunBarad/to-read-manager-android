@@ -23,8 +23,7 @@
         app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        android:background="#222" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
@@ -33,9 +32,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:backgroundTint="#333"
-        app:itemTextColor="#ccc"
-        app:itemRippleColor="#444"
-        app:itemIconTint="@drawable/bottom_navigation_selector"
         app:menu="@menu/bottom_bar_categories" />
 </androidx.constraintlayout.widget.ConstraintLayout>
